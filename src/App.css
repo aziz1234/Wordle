@@ -3,3 +3,35 @@ main {
   vertical-align: center;
   line-height: 100vh
 }
+
+.root {
+    background: black;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 15%);
+    grid-template-rows: repeat(6, 0fr);
+    grid-gap: 2vh;
+    place-items: center;
+    place-content: center;
+}
+
+.grid-cell {
+    width: 100%;
+    padding-bottom: 100%;
+    background: black;
+    border: 3px solid white;
+    position: relative;
+}
+
+.grid-text {
+    position:absolute;
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
