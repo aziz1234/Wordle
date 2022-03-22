@@ -11,6 +11,19 @@ main {
     place-content: center;
 }
 
+.heading {
+    display: grid;
+    background: black;
+    border: 1px solid white;
+}
+
+.heading-text {
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(5, 15%);
@@ -18,6 +31,7 @@ main {
     grid-gap: 2vh;
     place-items: center;
     place-content: center;
+    padding-top: 2vh;
 }
 
 .grid-cell {
@@ -31,7 +45,7 @@ main {
 .grid-text {
     position:absolute;
     color: white;
-    font-size: 3rem;
+    font-size: 2.5rem;
     text-align: center;
     top: 0;
     bottom: 0;

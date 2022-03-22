@@ -51,6 +51,16 @@ function App() {
                 answer.replace(input[i].toLowerCase(),'');
             }
         }
+
+        if(!answer.length) {
+            setCellStatus(prevCells => {
+                prevCells[chance.current] = newTiles;
+                return [...prevCells];
+            });
+            window.alert('Magnificent !!');
+            return;
+        }
+        
          for(let i=0; i<5; i++) {
              if(input[i].toLowerCase() !== wordle.current[i] && answer.includes(input[i].toLowerCase())) {
                  newTiles[i]= "almost-match";
@@ -69,6 +79,10 @@ function App() {
         }
     }
   return (
+      <>
+      <div className = "heading">
+        <span className = "heading-text">Wordle</span>
+    </div>
       <div className = "root">
             <div className = "grid">
                 {
@@ -101,6 +115,7 @@ function App() {
                 ]}
             />
       </div>
+    </>
   );
 }
 
