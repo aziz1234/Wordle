@@ -6,6 +6,9 @@ main {
 
 .root {
     background: black;
+    display: grid;
+    grid-gap: 2vh;
+    place-content: center;
 }
 
 .grid {
@@ -34,4 +37,26 @@ main {
     bottom: 0;
     left: 0;
     right: 0
+}
+
+.simple-keyboard.hg-theme-default.myTheme {
+  background: black;
+color: white;
+}
+
+.keyboard-buttons {
+    background: dimgray !important;
+    
+}
+
+.hg-theme-default .hg-button.hg-standardBtn {
+    width: 5.5vw;
+}
+
+#perfect-match {
+    background: #2fb50d
+}
+
+#almost-match {
+    background: #dcf500
 }
