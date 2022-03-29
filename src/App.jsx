@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import Keyboard from 'react-simple-keyboard';
 import {VALID_GUESSES} from './constants/validGuesses';
 import {WORDS} from './constants/wordlist';
@@ -9,11 +9,17 @@ function App() {
     
     const [cells, setCells] = useState(new Array(6).fill("").map(e => Array(5).fill("")));
     const [cellStatus, setCellStatus] = useState(new Array(6).fill("").map(e => Array(5).fill("")));
-    const wordle = useRef("hello");
+    const wordle = useRef("");
     const keyboard = useRef();
     const chance = useRef(0);
     const alphabet = useRef(0);
     const disableUserInput = useRef(false);
+
+    useEffect(() => {
+        let index = Math.round(Math.random() * (WORDS.length-1)) + 1;
+        wordle.current = WORDS[index];
+        // console.log(WORDS[index]);
+    },[])
     
     const onKeyPress = (button) => {
         if(disableUserInput.current)
@@ -29,7 +35,7 @@ function App() {
         }
         else if(button === '{enter}') {
             if(alphabet.current > 4)
-                checkForMatch();
+                checkIsWordValid();
             else
                 window.alert('Not enough Alphabets');
         }
@@ -55,15 +61,6 @@ function App() {
                 answer = answer.replace(input[i].toLowerCase(),'');
             }
         }
-
-        // if(!answer.length) {
-        //     setCellStatus(prevCells => {
-        //         prevCells[chance.current] = newTiles;
-        //         return [...prevCells];
-        //     });
-        //     window.alert('Magnificent !!');
-        //     return;
-        // }
          for(let i=0; i<5; i++) {
              if(input[i].toLowerCase() !== wordle.current[i] && answer.includes(input[i].toLowerCase())) {
                  newTiles[i]= "almost-match";
@@ -93,10 +90,31 @@ function App() {
             disableUserInput.current = true;
         }
     }
+
+    const checkIsWordValid = () => {
+        let guess = [...cells[chance.current]].join('');
+        let ifFound =  VALID_GUESSES.find(word => word === guess.toLowerCase());
+        if(ifFound)
+            checkForMatch();
+        else
+            window.alert("Not in word list")
+    }
+
+    const reloadNewGame = () => {
+        let index = Math.round(Math.random() * (WORDS.length-1)) + 1;
+        wordle.current = WORDS[index];
+        setCells(new Array(6).fill("").map(e => Array(5).fill("")));
+        setCellStatus(new Array(6).fill("").map(e => Array(5).fill("")));
+        disableUserInput.current = false;
+        chance.current = 0;
+        alphabet.current = 0;  
+    }
+    
   return (
       <>
       <div className = "heading">
         <span className = "heading-text">Wordle</span>
+        <div className = "reload-btn" onClick = {reloadNewGame}>🔄</div>
     </div>
       <div className = "root">
             <div className = "grid">
